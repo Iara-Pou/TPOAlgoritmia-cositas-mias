@@ -46,8 +46,28 @@ public class StaticStackADT implements StackADT {
         return top == -1;
     }
 
+    public StaticStackADT copy() {
+        StaticStackADT tempStack = new StaticStackADT(this.size());
+        StaticStackADT copyStack = new StaticStackADT(this.size());
+
+        // Sacar los elementos de la pila original y ponerlos en la auxiliar
+        while (!this.isEmpty()) {
+            tempStack.add(this.getElement());
+        }
+
+        // Restaurar la pila original y copiar los elementos a la nueva pila
+        while (!tempStack.isEmpty()) {
+            int value = tempStack.getElement();
+            this.add(value);
+            copyStack.add(value);
+        }
+
+        return copyStack;
+    }
+
     public int size() {
         //ultima posicion llena +1 (arranca en 0)
         return top + 1;
     }
+
 }
